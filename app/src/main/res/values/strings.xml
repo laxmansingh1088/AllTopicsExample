@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AllTopicsExample</string>
+
+
+    <string-array name="topics_list">
+        <item>Dagger</item>
+        <item>RxJava</item>
+        <item>LiveData</item>
+        <item>Room</item>
+        <item>MVVM</item>
+        <item>Activity</item>
+        <item>Fragments</item>
+        <item>BroadCast Receivers</item>
+        <item>Services</item>
+    </string-array>
+
+
+</resources>

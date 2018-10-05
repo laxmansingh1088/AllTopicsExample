@@ -17,9 +17,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".mvvm.MVVMActivity" />
         <activity
-            android:name=".mvvm.MVVMActivity"
-            />
+            android:name=".dagger.Activity.DaggerActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

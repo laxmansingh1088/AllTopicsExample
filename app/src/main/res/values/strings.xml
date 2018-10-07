@@ -2,6 +2,10 @@
     <string name="app_name">AllTopicsExample</string>
     <string name="save">Save</string>
     <string name="hint_enter_name">Enter your name</string>
+    <string name="hint_enter_title">Enter title</string>
+    <string name="hint_enter_description">Enter description</string>
+    <string name="priority">Priority:</string>
+    <string name="add_note">Add Note</string>
 
 
     <string-array name="topics_list">

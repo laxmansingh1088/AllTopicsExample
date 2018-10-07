@@ -21,6 +21,10 @@
         <activity
             android:name=".dagger.Activity.DaggerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvvm.AddNoteActivity"
+            android:parentActivityName=".mvvm.MVVMActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

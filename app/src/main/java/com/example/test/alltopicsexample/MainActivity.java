@@ -16,7 +16,6 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-
     private Context mContext;
     private RecyclerView mRvTopics;
     private AndroidTopicsAdapter mAndroidTopicsAdapter;

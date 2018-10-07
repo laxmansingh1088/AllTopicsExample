@@ -6,10 +6,15 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -35,6 +40,7 @@ public class MVVMActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = this;
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white);
         setTitle("MVVM");
         setContentView(R.layout.mvvm_demo_activity);
         onFindView();
@@ -48,8 +54,6 @@ public class MVVMActivity extends BaseActivity {
                 mNoteAdapter.setList(notes);
             }
         });
-
-
     }
 
     @Override
@@ -74,8 +78,45 @@ public class MVVMActivity extends BaseActivity {
                 startActivityForResult(new Intent(MVVMActivity.this, AddNoteActivity.class), ADD_NOTE_REQUEST_CODE);
             }
         });
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                mNoteViewModel.deleteNote(mNoteAdapter.getNoteAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(mContext, "Note Deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(mRvNotes);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.delete_all_notes, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.delete_all_notes:
+                mNoteViewModel.deleteAllNotes();
+                return true;
+
+            default:
+               return super.onOptionsItemSelected(item);
+
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

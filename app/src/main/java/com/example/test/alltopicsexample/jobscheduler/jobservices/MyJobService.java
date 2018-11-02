@@ -14,6 +14,8 @@ public class MyJobService extends JobService {
     public boolean onStartJob(JobParameters params) {
         Log.i(TAG, "Job Started");
         doSomeStuff(params);
+        // return true if some other work is done in another thread and that thread will complete the job.
+        // return false if no other thread is started and this method executes every thing.
         return true;
     }
 

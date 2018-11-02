@@ -1,7 +1,6 @@
 package com.example.test.alltopicsexample.mvvm;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Menu;
@@ -12,6 +11,8 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.example.test.alltopicsexample.R;
+import com.example.test.alltopicsexample.mvvm.model.Note;
+import com.example.test.alltopicsexample.mvvm.viewmodel.NoteViewModel;
 import com.example.test.alltopicsexample.utils.BaseActivity;
 
 public class AddNoteActivity extends BaseActivity {
@@ -22,6 +23,7 @@ public class AddNoteActivity extends BaseActivity {
 
     private EditText et_title, et_description;
     private NumberPicker number_picker;
+    private NoteViewModel mNoteViewModel;
 
 
     @Override
@@ -30,6 +32,7 @@ public class AddNoteActivity extends BaseActivity {
         setContentView(R.layout.add_note_activity);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white);
         setTitle(getString(R.string.add_note));
+        mNoteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         onFindView();
         onInView();
         onBindView();
@@ -90,15 +93,10 @@ public class AddNoteActivity extends BaseActivity {
             Toast.makeText(this, "Please enter title and descrition.", Toast.LENGTH_SHORT).show();
             return;
         } else {
-
-            Intent intent = new Intent();
-            intent.putExtra(EXTRA_TITLE, title);
-            intent.putExtra(EXTRA_DESCRIPTION, description);
-            intent.putExtra(EXTRA_PRIORITY, priority);
-
-            setResult(Activity.RESULT_OK, intent);
+            Note note = new Note(title, description, priority);
+            mNoteViewModel.insertNote(note);
+            Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show();
             finish();
-
         }
     }
 

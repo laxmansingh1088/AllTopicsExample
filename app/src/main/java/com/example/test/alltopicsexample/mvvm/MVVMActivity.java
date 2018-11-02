@@ -1,6 +1,5 @@
 package com.example.test.alltopicsexample.mvvm;
 
-import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -27,8 +26,6 @@ import com.example.test.alltopicsexample.utils.BaseActivity;
 import java.util.List;
 
 public class MVVMActivity extends BaseActivity {
-    public static final int ADD_NOTE_REQUEST_CODE = 1009;
-
     private Context mContext;
     private RecyclerView mRvNotes;
     private NoteViewModel mNoteViewModel;
@@ -54,6 +51,9 @@ public class MVVMActivity extends BaseActivity {
                 mNoteAdapter.setList(notes);
             }
         });
+
+
+
     }
 
     @Override
@@ -75,7 +75,7 @@ public class MVVMActivity extends BaseActivity {
         fab_add_note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(MVVMActivity.this, AddNoteActivity.class), ADD_NOTE_REQUEST_CODE);
+                startActivity(new Intent(MVVMActivity.this, AddNoteActivity.class));
             }
         });
 
@@ -115,23 +115,6 @@ public class MVVMActivity extends BaseActivity {
             default:
                return super.onOptionsItemSelected(item);
 
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == ADD_NOTE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            String title = data.getStringExtra(AddNoteActivity.EXTRA_TITLE);
-            String description = data.getStringExtra(AddNoteActivity.EXTRA_DESCRIPTION);
-            int priority = data.getIntExtra(AddNoteActivity.EXTRA_PRIORITY, 1);
-
-            Note note = new Note(title, description, priority);
-            mNoteViewModel.insertNote(note);
-            Toast.makeText(mContext, "Note saved", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(mContext, "Note not saved", Toast.LENGTH_SHORT).show();
         }
     }
 }

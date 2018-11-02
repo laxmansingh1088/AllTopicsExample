@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.test.alltopicsexample.R;
 import com.example.test.alltopicsexample.dagger.Activity.DaggerActivity;
+import com.example.test.alltopicsexample.jobscheduler.JobSchedulerActivity;
 import com.example.test.alltopicsexample.mvvm.MVVMActivity;
 
 import java.util.List;
@@ -101,6 +102,11 @@ public class AndroidTopicsAdapter extends RecyclerView.Adapter<RecyclerView.View
                     break;
 
                 case "Services":
+                    break;
+
+
+                case "JobScheduler":
+                    mContext.startActivity(new Intent(mContext, JobSchedulerActivity.class));
                     break;
 
                 default:

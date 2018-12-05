@@ -22,6 +22,8 @@ public class JobSchedulerActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jobschedule);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         onFindView();
         onInView();
         onBindView();
@@ -44,6 +46,11 @@ public class JobSchedulerActivity extends BaseActivity {
         stop_job.setOnClickListener(this);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     public void onClick(View v) {

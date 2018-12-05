@@ -30,7 +30,8 @@ public class DaggerActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dagger_activity);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         sharedPrefComponent = DaggerSharedPrefComponent
                 .builder()
                 .activityContextModule(new ActivityContextModule(this))
@@ -58,11 +59,18 @@ public class DaggerActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void onBindView() {
         btn_save.setOnClickListener(this);
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     public void onClick(View v) {

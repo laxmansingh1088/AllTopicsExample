@@ -32,6 +32,8 @@ public class AddNoteActivity extends BaseActivity {
         setContentView(R.layout.add_note_activity);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white);
         setTitle(getString(R.string.add_note));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         mNoteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         onFindView();
         onInView();
@@ -59,6 +61,11 @@ public class AddNoteActivity extends BaseActivity {
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

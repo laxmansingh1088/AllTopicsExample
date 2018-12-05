@@ -38,7 +38,8 @@ public class MVVMActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mvvm_demo_activity);
         mContext = this;
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_white);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("MVVM");
         onFindView();
         onInView();
@@ -95,6 +96,12 @@ public class MVVMActivity extends BaseActivity {
         }).attachToRecyclerView(mRvNotes);
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

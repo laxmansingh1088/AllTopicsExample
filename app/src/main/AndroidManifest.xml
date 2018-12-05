@@ -37,6 +37,9 @@
 
         <activity android:name=".tiktoe.TikToeGameActivity" />
 
+        <activity
+            android:name=".spinbottle.SpinTheBottleActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".jobscheduler.jobservices.MyJobService"

@@ -14,6 +14,7 @@ import com.example.test.alltopicsexample.R;
 import com.example.test.alltopicsexample.dagger.Activity.DaggerActivity;
 import com.example.test.alltopicsexample.jobscheduler.JobSchedulerActivity;
 import com.example.test.alltopicsexample.mvvm.MVVMActivity;
+import com.example.test.alltopicsexample.spinbottle.SpinTheBottleActivity;
 import com.example.test.alltopicsexample.tiktoe.TikToeGameActivity;
 
 import java.util.List;
@@ -112,6 +113,10 @@ public class AndroidTopicsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
                 case "Tic tac toe":
                     mContext.startActivity(new Intent(mContext, TikToeGameActivity.class));
+                    break;
+
+                case "Spin the Bottle":
+                    mContext.startActivity(new Intent(mContext, SpinTheBottleActivity.class));
                     break;
 
                 default:

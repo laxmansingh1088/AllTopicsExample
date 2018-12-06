@@ -1,13 +1,20 @@
 package com.example.test.alltopicsexample.tiktoe;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.test.alltopicsexample.R;
 import com.example.test.alltopicsexample.utils.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TikToeGameActivity extends BaseActivity {
 
@@ -16,14 +23,16 @@ public class TikToeGameActivity extends BaseActivity {
 
     private int roundCount = 0;
 
-    private int player1Points;
-    private int player2Points;
+    private int player1Points = 0;
+    private int player2Points = 0;
 
 
     private TextView mTvPlayer1;
     private TextView mTvPlayer2;
 
     private Button mBtnReset;
+
+    private List<Button> winningButtonList = new ArrayList<Button>();
 
 
     @Override
@@ -45,6 +54,7 @@ public class TikToeGameActivity extends BaseActivity {
         mTvPlayer1 = findViewById(R.id.text_view_p1);
         mTvPlayer2 = findViewById(R.id.text_view_p2);
 
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 String buttonId = "button_" + i + j;
@@ -64,7 +74,6 @@ public class TikToeGameActivity extends BaseActivity {
 
     @Override
     protected void onInView() {
-
     }
 
     @Override
@@ -124,6 +133,10 @@ public class TikToeGameActivity extends BaseActivity {
             if (field[i][0].equals(field[i][1])
                     && field[i][0].equals(field[i][2])
                     && !field[i][0].equals("")) {
+                winningButtonList.clear();
+                winningButtonList.add(buttons[i][0]);
+                winningButtonList.add(buttons[i][1]);
+                winningButtonList.add(buttons[i][2]);
                 return true;
             }
         }
@@ -133,17 +146,33 @@ public class TikToeGameActivity extends BaseActivity {
             if (field[0][j].equals(field[1][j])
                     && field[0][j].equals(field[2][j])
                     && !field[0][j].equals("")) {
+                winningButtonList.clear();
+                winningButtonList.add(buttons[0][j]);
+                winningButtonList.add(buttons[1][j]);
+                winningButtonList.add(buttons[2][j]);
                 return true;
             }
         }
 
 
-        if ((field[0][0].equals(field[1][1])
+        if (field[0][0].equals(field[1][1])
                 && field[0][0].equals(field[2][2])
-                && !field[0][0].equals(""))
-                || (field[0][2].equals(field[1][1])
+                && !field[0][0].equals("")) {
+            winningButtonList.clear();
+            winningButtonList.add(buttons[0][0]);
+            winningButtonList.add(buttons[1][1]);
+            winningButtonList.add(buttons[2][2]);
+            return true;
+        }
+
+
+        if (field[0][2].equals(field[1][1])
                 && field[0][2].equals(field[2][0])
-                && !field[0][2].equals(""))) {
+                && !field[0][2].equals("")) {
+            winningButtonList.clear();
+            winningButtonList.add(buttons[0][2]);
+            winningButtonList.add(buttons[1][1]);
+            winningButtonList.add(buttons[2][0]);
             return true;
         }
 
@@ -161,6 +190,7 @@ public class TikToeGameActivity extends BaseActivity {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setText("");
+                buttons[i][j].setBackgroundColor(getResources().getColor(R.color.silver));
             }
         }
         player1turn = true;
@@ -168,17 +198,36 @@ public class TikToeGameActivity extends BaseActivity {
     }
 
     private void player1Wins() {
+        for (int i = 0; i < winningButtonList.size(); i++) {
+            winningButtonList.get(i).setBackgroundColor(getResources().getColor(R.color.maroon));
+        }
         Toast.makeText(this, "Player 1 Wins", Toast.LENGTH_LONG).show();
         player1Points++;
         updatePlayersPointBoard();
-        resetBoard();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                resetBoard();
+            }
+        }, 3000);
+
     }
 
+
+
     private void player2Wins() {
+        for (int i = 0; i < winningButtonList.size(); i++) {
+            winningButtonList.get(i).setBackgroundColor(getResources().getColor(R.color.maroon));
+        }
         Toast.makeText(this, "Player 2 Wins", Toast.LENGTH_LONG).show();
         player2Points++;
         updatePlayersPointBoard();
-        resetBoard();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                resetBoard();
+            }
+        }, 3000);
 
     }
 

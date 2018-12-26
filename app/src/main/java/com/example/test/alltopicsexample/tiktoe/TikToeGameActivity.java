@@ -214,7 +214,6 @@ public class TikToeGameActivity extends BaseActivity {
     }
 
 
-
     private void player2Wins() {
         for (int i = 0; i < winningButtonList.size(); i++) {
             winningButtonList.get(i).setBackgroundColor(getResources().getColor(R.color.maroon));
@@ -233,8 +232,8 @@ public class TikToeGameActivity extends BaseActivity {
 
 
     private void updatePlayersPointBoard() {
-        mTvPlayer1.setText("Player 1 points:--  " + String.valueOf(player1Points));
-        mTvPlayer2.setText("Player 2 points:--  " + String.valueOf(player2Points));
+        mTvPlayer1.setText("Player 1: " + String.valueOf(player1Points));
+        mTvPlayer2.setText("Player 2: " + String.valueOf(player2Points));
     }
 
 
